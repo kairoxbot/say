@@ -1,0 +1,11 @@
+{
+  "name": "discord-nuke",
+  "version": "4.0.0",
+  "main": "api/server.js",
+  "scripts": { "start": "node api/server.js", "dev": "node api/server.js" },
+  "dependencies": {
+    "discord.js": "^14.14.1",
+    "discord.js-selfbot-v13": "^3.3.3",
+    "express": "^4.18.2"
+  }
+}

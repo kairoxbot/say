@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>☢ NUKER v4</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="app">
+
+  <header>
+    <span class="logo">☢ NUKER</span>
+    <div class="tabs">
+      <button class="tab active" data-tab="bot">🤖 BOT</button>
+      <button class="tab"        data-tab="self">👤 SELFBOT</button>
+    </div>
+    <div class="status-bar">
+      <span id="botStatus"  class="status">BOT: OFFLINE</span>
+      <span id="selfStatus" class="status">SELF: OFFLINE</span>
+    </div>
+  </header>
+
+  <main>
+    <aside class="left">
+
+      <div class="card mode-bot">
+        <div class="card-title">BOT CONNECTION</div>
+        <input id="botToken" type="password" placeholder="Bot token" />
+        <button id="botConnectBtn" class="btn bot full">CONNECT BOT</button>
+        <div id="botInfo" class="conn-info hidden"></div>
+      </div>
+
+      <div class="card mode-self hidden">
+        <div class="card-title">SELFBOT CONNECTION</div>
+        <input id="selfToken" type="password" placeholder="User token" />
+        <button id="selfConnectBtn" class="btn self full">CONNECT SELFBOT</button>
+        <div id="selfInfo" class="conn-info self-col hidden"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">SERVERS</div>
+        <div id="guildList" class="guild-list">
+          <span class="muted">none loaded</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">TARGET INFO</div>
+        <div id="guildInfo"><span class="muted">no server selected</span></div>
+      </div>
+
+      <div id="selfExtra" class="card mode-self hidden">
+        <div class="card-title">INVITE RAID</div>
+        <input id="inviteInput" type="text" placeholder="discord.gg/xxxx or code" />
+        <select id="raidPreset" class="sel">
+          <option value="fullRageNuke">☢ Full Rage Nuke</option>
+          <option value="floodMode">💬 Flood Mode</option>
+          <option value="adminNuke">⚔️ Admin Nuke</option>
+          <option value="rageQuit">🏃 Rage Quit</option>
+        </select>
+        <button id="raidBtn" class="btn self full" disabled>⚡ RAID</button>
+        <div class="card-title" style="margin-top:14px">ACCOUNT</div>
+        <input id="newUsername" type="text" placeholder="New username" />
+        <button id="usernameBtn" class="btn self full" disabled>CHANGE USERNAME</button>
+      </div>
+
+    </aside>
+
+    <div class="right">
+
+      <div class="card mode-bot">
+        <div class="card-title">BOT PRESETS</div>
+        <div class="presets">
+          <button class="btn bot-d preset" data-mode="bot" data-preset="fullNuke">☢ FULL NUKE</button>
+          <button class="btn bot-w preset" data-mode="bot" data-preset="creatorNuke">👑 CREATOR NUKE</button>
+          <button class="btn bot-w preset" data-mode="bot" data-preset="chaosMode">💀 CHAOS MODE</button>
+          <button class="btn bot-w preset" data-mode="bot" data-preset="stealth">🔇 STEALTH</button>
+          <button class="btn bot-w preset" data-mode="bot" data-preset="purgeOnly">🔨 PURGE ONLY</button>
+          <button class="btn bot-w preset" data-mode="bot" data-preset="spamOnly">📢 SPAM FLOOD</button>
+        </div>
+      </div>
+
+      <div class="card mode-self hidden">
+        <div class="card-title">SELFBOT PRESETS</div>
+        <div class="presets">
+          <button class="btn self-d preset" data-mode="self" data-preset="fullRageNuke">☢ FULL RAGE NUKE</button>
+          <button class="btn self-w preset" data-mode="self" data-preset="ghostNuke">👻 GHOST NUKE</button>
+          <button class="btn self-w preset" data-mode="self" data-preset="floodMode">💬 FLOOD MODE</button>
+          <button class="btn self-w preset" data-mode="self" data-preset="rageQuit">🏃 RAGE QUIT</button>
+          <button class="btn self-w preset" data-mode="self" data-preset="adminNuke">⚔️ ADMIN NUKE</button>
+          <button class="btn self-w preset" data-mode="self" data-preset="dmBombAll">📩 DM BOMB ALL</button>
+        </div>
+      </div>
+
+      <div class="card mode-bot">
+        <div class="card-title">BOT OPERATIONS</div>
+        <div class="ops-grid">
+          <label class="op bot-op"><input type="checkbox" data-mode="bot" data-op="deleteChannels" checked /><span>Delete Channels</span></label>
+          <label class="op bot-op"><input type="checkbox" data-mode="bot" data-op="deleteRoles"    checked /><span>Delete Roles</span></label>
+          <label class="op bot-op"><input type="checkbox" data-mode="bot" data-op="massBan"        checked /><span>Mass Ban</span></label>
+          <label class="op bot-op"><input type="checkbox" data-mode="bot" data-op="massKick"              /><span>Mass Kick</span></label>
+          <label class="op bot-op"><input type="checkbox" data-mode="bot" data-op="spamChannels"   checked /><span>Spam Channels</span></label>
+          <label class="op bot-op"><input type="checkbox" data-mode="bot" data-op="spamRoles"             /><span>Spam Roles</span></label>
+          <label class="op bot-op"><input type="checkbox" data-mode="bot" data-op="deleteWebhooks" checked /><span>Delete Webhooks</span></label>
+          <label class="op bot-op"><input type="checkbox" data-mode="bot" data-op="creatorNuke"           /><span>Creator Nuke</span></label>
+          <label class="op bot-op"><input type="checkbox" data-mode="bot" data-op="renameAll"             /><span>Rename All</span></label>
+          <label class="op bot-op"><input type="checkbox" data-mode="bot" data-op="renameServer"          /><span>Rename Server</span></label>
+          <label class="op bot-op"><input type="checkbox" data-mode="bot" data-op="changeIcon"            /><span>Change Icon</span></label>
+          <label class="op bot-op"><input type="checkbox" data-mode="bot" data-op="dmAll"                 /><span>DM All</span></label>
+        </div>
+        <div class="config-row">
+          <label>Spam name<input  id="botSpamName"    type="text"   value="nuked" /></label>
+          <label>Count<input      id="botSpamCount"   type="number" value="50" min="1" max="250" /></label>
+          <label>Server name<input id="botServerName" type="text"   value="☢ NUKED ☢" /></label>
+        </div>
+        <button id="botExecBtn" class="btn bot-d execute" disabled>⚡ EXECUTE BOT</button>
+      </div>
+
+      <div class="card mode-self hidden">
+        <div class="card-title">SELFBOT OPERATIONS</div>
+        <div class="sec-title">ADMIN OPS</div>
+        <div class="ops-grid">
+          <label class="op self-op"><input type="checkbox" data-mode="self" data-op="deleteChannels" /><span>Delete Channels</span></label>
+          <label class="op self-op"><input type="checkbox" data-mode="self" data-op="deleteRoles"    /><span>Delete Roles</span></label>
+          <label class="op self-op"><input type="checkbox" data-mode="self" data-op="massBan"        /><span>Mass Ban</span></label>
+          <label class="op self-op"><input type="checkbox" data-mode="self" data-op="massKick"       /><span>Mass Kick</span></label>
+          <label class="op self-op"><input type="checkbox" data-mode="self" data-op="spamChannels"   /><span>Spam Channels</span></label>
+          <label class="op self-op"><input type="checkbox" data-mode="self" data-op="spamRoles"      /><span>Spam Roles</span></label>
+          <label class="op self-op"><input type="checkbox" data-mode="self" data-op="deleteWebhooks" /><span>Delete Webhooks</span></label>
+          <label class="op self-op"><input type="checkbox" data-mode="self" data-op="creatorNuke"    /><span>Creator Nuke</span></label>
+          <label class="op self-op"><input type="checkbox" data-mode="self" data-op="renameAll"      /><span>Rename All</span></label>
+          <label class="op self-op"><input type="checkbox" data-mode="self" data-op="renameServer"   /><span>Rename Server</span></label>
+          <label class="op self-op"><input type="checkbox" data-mode="self" data-op="changeIcon"     /><span>Change Icon</span></label>
+        </div>
+        <div class="sec-title" style="margin-top:8px">USER OPS</div>
+        <div class="ops-grid">
+          <label class="op self-op"><input type="checkbox" data-mode="self" data-op="spamMessages" checked /><span>Spam Messages</span></label>
+          <label class="op self-op"><input type="checkbox" data-mode="self" data-op="massDMAll"    checked /><span>Mass DM All</span></label>
+          <label class="op self-op"><input type="checkbox" data-mode="self" data-op="ghostMode"           /><span>Ghost Mode</span></label>
+          <label class="op self-op"><input type="checkbox" data-mode="self" data-op="leaveServer"         /><span>Leave Server</span></label>
+        </div>
+        <div class="config-row">
+          <label>Spam name<input   id="selfSpamName"   type="text"   value="nuked" /></label>
+          <label>Count<input       id="selfSpamCount"  type="number" value="20" min="1" max="250" /></label>
+          <label>Server name<input id="selfServerName" type="text"   value="☢ NUKED ☢" /></label>
+          <label>Msg text<input    id="selfSpamMsg"    type="text"   value="☢ nuked ☢" /></label>
+          <label>DM text<input     id="selfDmMsg"      type="text"   value="☢ server is dead ☢" /></label>
+        </div>
+        <button id="selfExecBtn" class="btn self-d execute" disabled>⚡ EXECUTE SELFBOT</button>
+      </div>
+
+      <div class="card log-card">
+        <div class="log-top">
+          <span class="card-title" style="margin:0">LOGS</span>
+          <div style="display:flex;gap:8px;align-items:center">
+            <label class="fl"><input type="checkbox" id="flBot"  checked /> BOT</label>
+            <label class="fl"><input type="checkbox" id="flSelf" checked /> SELF</label>
+            <button id="clearLog" class="btn sm">CLEAR</button>
+          </div>
+        </div>
+        <div id="logOutput" class="log-output"></div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<script src="dashboard.js"></script>
+</body>
+</html>
